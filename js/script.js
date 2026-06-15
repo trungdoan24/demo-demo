@@ -1,0 +1,1 @@
+document.addEventListener("DOMContentLoaded", () => { console.log("Cổng thông tin nội bộ đã khởi động"); const cards = document.querySelectorAll(".card"); cards.forEach(card => { card.addEventListener("click", () => { card.style.boxShadow = "0 0 20px rgba(0,102,204,.4)"; setTimeout(() => { card.style.boxShadow = "0 2px 10px rgba(0,0,0,.08)"; }, 300); }); }); });
