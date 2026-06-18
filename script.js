@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
 
     console.log("Cổng thông tin nội bộ đã khởi động");
@@ -84,5 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
         });
-/* Danh mục Văn bản */
+});
+
 
