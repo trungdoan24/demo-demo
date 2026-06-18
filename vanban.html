@@ -363,7 +363,7 @@
     </header>
 
     <nav>
-        <a href="index.html">
+        <a href="login.html">
             <i class="fa-solid fa-house"></i>
             Trang chủ</a>
         <a href="vanban.html">
@@ -374,7 +374,7 @@
 
         <h1 class="title">Danh mục văn bản</h1>
         <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm văn bản..." autocomplete="off">
-
+        <p id="resultCount"></p>
         <div class="category">
             <h2> Quân sự</h2>
             <h3>
@@ -686,11 +686,6 @@
                     </a>
                 </li>
                 <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/HD 15 PKT.pdf">
-                        📄 Hướng dẫn 15 PKT
-                    </a>
-                </li>
-                <li>
                     <a href="sohoa/hckt/VB kỹ thuật/HDND BQVKBB ngày, tuần.pdf">
                         📄 Hướng dẫn ND BQVKBB ngày, tuần
                     </a>
@@ -698,16 +693,6 @@
                 <li>
                     <a href="sohoa/hckt/VB kỹ thuật/Hướng dẫn sắp xếp tủ súng K22 sửa.pdf">
                         📄 Hướng dẫn sắp xếp tủ súng K22 sửa
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/Quy dinh 725 va cong van so 451.pdf">
-                        📄 Quy định 725 và công văn số 451
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/TBKT SSCĐ Quy dinh 974.pdf">
-                        📄 TBKT SSCĐ Quy định 974
                     </a>
                 </li>
                 <li>
@@ -724,42 +709,61 @@
         © 2026 CỔNG THÔNG TIN TRUNG ĐOÀN 24
     </footer>
     <script>
-        function removeVietnameseTones(str) {
+        function removeVietnamese(str) {
             return str
-                .toLowerCase()
                 .normalize("NFD")
                 .replace(/[\u0300-\u036f]/g, "")
                 .replace(/đ/g, "d")
-                .replace(/Đ/g, "D");
+                .replace(/Đ/g, "D")
+                .toLowerCase();
+        }
+
+        function getAbbreviation(text) {
+            return text
+                .split(/\s+/)
+                .map(w => w[0])
+                .join("");
         }
 
         const searchInput = document.getElementById("searchInput");
 
-        searchInput.addEventListener("keyup", function () {
-            const keyword = removeVietnameseTones(this.value);
+        function searchDocument() {
 
-            document.querySelectorAll(".document-list li").forEach(item => {
-                const text = removeVietnameseTones(item.textContent);
+            const keyword = removeVietnamese(searchInput.value);
 
-                if (text.includes(keyword)) {
-                    item.style.display = "";
-                } else {
-                    item.style.display = "none";
-                }
-            });
-        });
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = "translateY(0)";
-                }
-            });
-        });
+            let count = 0;
 
-        document.querySelectorAll(".category").forEach(card => {
-            card.style.transition = "all .8s ease";
-            observer.observe(card);
+            document.querySelectorAll(".document-list li")
+                .forEach(item => {
+
+                    const text =
+                        removeVietnamese(item.textContent);
+
+                    const abbr =
+                        getAbbreviation(text);
+
+                    const found =
+                        text.includes(keyword) ||
+                        abbr.includes(keyword);
+
+                    item.style.display =
+                        found ? "" : "none";
+
+                    if (found) count++;
+                });
+
+            document.getElementById("resultCount").textContent =
+                `Tìm thấy ${count} văn bản`;
+        }
+
+        let timer;
+
+        searchInput.addEventListener("input", () => {
+
+            clearTimeout(timer);
+
+            timer = setTimeout(searchDocument, 250);
+
         });
     </script>
 </body>
