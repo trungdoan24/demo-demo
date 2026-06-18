@@ -2,421 +2,352 @@
 <html lang="vi">
 
 <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng nhập - Kho Văn Bản Trung đoàn 24</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", sans-serif;
-        }
-
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background:
-                linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
-                url('https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/02/23/1771801339865_255321603pm.jpeg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .login-box {
-            width: 400px;
-            padding: 40px;
-
-            background: rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 24px;
-
-            box-shadow:
-                0 8px 32px rgba(0, 0, 0, 0.35),
-                inset 0 1px 0 rgba(255, 255, 255, 0.25);
-
-            text-align: center;
-        }
-
-        .login-box::before {
-            content: "";
-            position: absolute;
-            width: 180px;
-            height: 180px;
-            opacity: .08;
-            background: url("https://upload.wikimedia.org/wikipedia/commons/a/a3/Emblem_of_Vietnam.svg") center/contain no-repeat;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .logo {
-            width: 90px;
-            margin-bottom: 15px;
-        }
-
-        h1 {
-            color: #fff;
-        }
-
-        .subtitle {
-            color: rgba(231, 222, 222, 0.85);
-        }
-
-        .footer {
-            color: rgba(255, 255, 255, .75);
-        }
-
-        .subtitle {
-            color: #ffffff;
-            margin-bottom: 25px;
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group input {
-            width: 100%;
-            height: 54px;
-            padding: 0 18px;
-            /* thêm khoảng cách trái phải */
-            background: rgba(255, 255, 255, .15);
-            color: #fff;
-
-            border: 1px solid rgba(255, 255, 255, .2);
-            border-radius: 14px;
-
-            backdrop-filter: blur(8px);
-        }
-
-        .input-group input:focus {
-            border-color: #1f3b2d;
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, .75);
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: #1f3b2d;
-            color: #fff;
-            font-size: 16px;
-            cursor: pointer;
-            transition: .3s;
-        }
-
-        button:hover {
-            background: #2d5541;
-        }
-
-        .footer {
-            margin-top: 20px;
-            color: #888;
-            font-size: 13px;
-        }
-
-        .error {
-            display: none;
-            background: #fdecec;
-            color: #c62828;
-            border: 1px solid #f5c2c7;
-            border-radius: 10px;
-            padding: 12px 15px;
-            margin-bottom: 18px;
-            text-align: left;
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .error::before {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-            border-radius: 50%;
-            background: #c62828;
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-
-            body {
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background:
-                    linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
-                    url('https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/02/23/1771801339865_255321603pm.jpeg');
-                background-size: cover;
-                background-position: center;
-            }
-
-            .login-box {
-                width: 400px;
-                padding: 40px;
-
-                background: rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(18px);
-                -webkit-backdrop-filter: blur(18px);
-
-                border: 1px solid rgba(255, 255, 255, 0.25);
-                border-radius: 24px;
-
-                box-shadow:
-                    0 8px 32px rgba(0, 0, 0, 0.35),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-
-                text-align: center;
-            }
-
-            .login-box::before {
-                content: "";
-                position: absolute;
-                width: 180px;
-                height: 180px;
-
-                background: url("https://upload.wikimedia.org/wikipedia/commons/a/a3/Emblem_of_Vietnam.svg") center/contain no-repeat;
-
-                opacity: .08;
-
-                top: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .logo {
-                width: 75px;
-            }
-
-            h1 {
-                color: #fff;
-            }
-
-            .subtitle {
-                color: rgba(255, 255, 255, .85);
-            }
-
-            .footer {
-                color: rgba(255, 255, 255, .75);
-            }
-
-            .subtitle {
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-
-            .input-group input {
-                width: 100%;
-                height: 54px;
-
-                background: rgba(255, 255, 255, .15);
-                color: #fff;
-
-                border: 1px solid rgba(255, 255, 255, .2);
-                border-radius: 14px;
-
-                backdrop-filter: blur(8px);
-            }
-
-            .input-group input::placeholder {
-                color: rgba(255, 255, 255, .75);
-            }
-
-            button {
-                height: 54px;
-
-                background: rgba(31, 59, 45, .8);
-                color: #fff;
-
-                border: 1px solid rgba(255, 255, 255, .15);
-                border-radius: 14px;
-
-                backdrop-filter: blur(10px);
-            }
-
-            button:hover {
-                background: rgba(45, 85, 65, .95);
-            }
-
-            .error {
-                font-size: 13px;
-                padding: 10px 12px;
-            }
-        }
-
-        /* Điện thoại nhỏ */
-        @media (max-width: 480px) {
-
-            .login-box {
-                width: 400px;
-                padding: 40px;
-
-                background: rgba(255, 255, 255, 0.12);
-                backdrop-filter: blur(18px);
-                -webkit-backdrop-filter: blur(18px);
-
-                border: 1px solid rgba(255, 255, 255, 0.25);
-                border-radius: 24px;
-
-                box-shadow:
-                    0 8px 32px rgba(0, 0, 0, 0.35),
-                    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-
-                text-align: center;
-            }
-
-            .login-box::before {
-                content: "";
-                position: absolute;
-                width: 180px;
-                height: 180px;
-
-                background: url("https://upload.wikimedia.org/wikipedia/commons/a/a3/Emblem_of_Vietnam.svg") center/contain no-repeat;
-
-                opacity: .08;
-
-                top: 30px;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            h1 {
-                color: #fff;
-            }
-
-            .subtitle {
-                color: rgba(255, 255, 255, .85);
-            }
-
-            .footer {
-                color: rgba(255, 255, 255, .75);
-            }
-
-            .logo {
-                width: 65px;
-            }
-
-            .subtitle {
-                font-size: 13px;
-            }
-        }
-
-        body {
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background:
-                linear-gradient(rgba(0, 0, 0, .6), rgba(0, 0, 0, .6)),
-                url('https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/02/23/1771801339865_255321603pm.jpeg');
-            background-size: cover;
-            background-position: center;
-        }
-
-        .input-group input {
-            width: 100%;
-            height: 54px;
-
-            background: rgba(255, 255, 255, .15);
-            color: #fff;
-
-            border: 1px solid rgba(255, 255, 255, .2);
-            border-radius: 14px;
-
-            backdrop-filter: blur(8px);
-        }
-
-        .input-group input:focus {
-            border-color: #1f3b2d;
-            box-shadow: 0 0 0 4px rgba(31, 59, 45, .12);
-        }
-
-        .input-group input::placeholder {
-            color: rgba(255, 255, 255, .75);
-        }
-
-        button {
-            height: 54px;
-
-            background: rgba(31, 59, 45, .8);
-            color: #fff;
-
-            border: 1px solid rgba(255, 255, 255, .15);
-            border-radius: 14px;
-
-            backdrop-filter: blur(10px);
-        }
-
-        button:hover {
-            background: rgba(45, 85, 65, .95);
-        }
-    </style>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>CỔNG THÔNG TIN TRUNG ĐOÀN 24</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
 </head>
 
 <body>
-
-    <div class="login-box">
-
-        <h1>CỔNG THÔNG TIN TRUNG ĐOÀN</h1>
-        <p class="subtitle">Trung đoàn 24 Trung Dũng</p>
-        <p id="error-message" class="error"></p>
-        <form onsubmit="return login()">
-            <div class="input-group">
-                <input type="text" id="username" placeholder="Tên đăng nhập" required>
+    <header>
+        <section class="hero">
+            <div class="hero-box">
+                <h2>TRUNG ĐOÀN 24 - TRUNG DŨNG</h2>
+                <p>
+                    Chính quy • Tinh nhuệ • Hiện đại
+                </p>
             </div>
+        </section>
+        <div class="top">
+            <h1>🇻🇳 CỔNG THÔNG TIN TRUNG ĐOÀN 24</h1>
+            <p>Hệ thống quản lý - Điều hành - Chia sẻ tài liệu</p>
+        </div>
+    </header>
+    <nav class="navbar">
 
-            <div class="input-group">
-                <input type="password" id="password" placeholder="Mật khẩu" required>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul class="menu">
+            <li> <a href="index.html">
+                    <i class="fa-solid fa-house"></i> Trang Chủ
+                </a>
+            </li>
+            <li><a href="#"><i class="fa-solid fa-bell"></i> Thông báo</a>
+            </li>
+            <li class="mega" id="vanban-menu">
+                <a href="vanban.html">
+                    <i class="fa-solid fa-folder"></i> Văn bản
+                </a>
+                <div class="mega-menu">
+                    <div class="column">
+                        <h3>Quân sự</h3> <a href="#">SSCĐ</a> <a href="#">Xây Dựng lực lượng</a> <a
+                            href="#">XDCQ-QLKL</a>
+                        <a href="#">ĐLQLBD</a>
+                        <a href="#">ĐLĐN</a>
+                        <a href="#">KTCĐBB</a>
+                        <a href="#">ĐLQLBD</a>
+                        <a href="#">CTBB</a>
+                        <a href="#">Thể lực</a>
+                        <div class="submenu-item">
+                            <a href="#">Những chiến lệ ▶</a>
+                            <div class="submenu-level2">
+                                <a href="sohoa/chienle/TRẬN CHIẾN ĐẤU ĐÁNH ĐIỂM, DIỆT VIỆN PHƯƠNG ĐIẾM – ĐƯỜNG 17.pdf"
+                                    target="_blank">
+                                    TRẬN CHIẾN ĐẤU ĐÁNH ĐIỂM, DIỆT VIỆN PHƯƠNG ĐIẾM – ĐƯỜNG 17
+                                </a>
+                                <a href="sohoa/chienle/TRẬN PHỤC KÍCH BẮC CẦU IA TÔVE (ĐƯỜNG 14).pdf">
+                                    TRẬN PHỤC KÍCH BẮC CẦU IA TÔVE (ĐƯỜNG 14)
+                                </a>
+                                <a href="sohoa/chienle/TRẬN PHỤC KÍCH ĐAK CHỜ CỦA TIỂU ĐOÀN BỘ BINH 4 ,.pdf">
+                                    TRẬN PHỤC KÍCH ĐAK CHỜ CỦA TIỂU ĐOÀN BỘ BINH 4
+                                </a>
+                                <a href="sohoa/chienle/TRẬN THỌC SÂU ĐÁNH CHIẾM SÂN BAY TÂN SƠN NHẤT CỦA eBB24 TRUNG DŨNG.pdf"
+                                    target="_blank">
+                                    TRẬN THỌC SÂU ĐÁNH CHIẾM SÂN BAY TÂN SƠN NHẤT CỦA eBB24 TRUNG DŨNG
+                                </a>
+                                <a href="sohoa/chienle/TRẬN TIẾN CÔNG ĐIỂM  CAO 1227 KON ROC.pdf" target="_blank">
+                                    TRẬN TIẾN CÔNG ĐIỂM CAO 1227 KON ROC
+                                </a>
+                                <a href="sohoa/chienle/TRẬN TẬP KÍCH TRẬN ĐỊA PHÁO 105mm Ở ẤP KON HƠ RING.pdf">
+                                    TRẬN TẬP KÍCH TRẬN ĐỊA PHÁO 105mm Ở ẤP KON HƠ RING
+                                </a>
+                                <a
+                                    href="sohoa/chienle/TRẬN TẬP KÍCH ẤP KON HƠ NÔNG CỦA TIỂU ĐOÀN BỘ BINH 5 (Thiếu), TRUNG ĐOÀN 24 TRUNG DŨNG.pdf">
+                                    TRẬN TẬP KÍCH ẤP KON HƠ NÔNG CỦA TIỂU ĐOÀN BỘ BINH 5 (Thiếu), TRUNG ĐOÀN 24
+                                    TRUNG DŨNG
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3>Chính Trị</h3>
+                        <div class="submenu-item">
+
+                            <a href="#">Bài giảng Chính trị CS năm 1 ▶</a>
+
+                            <div class="submenu-level2">
+
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 1 HSQ-BS 2026.pdf"
+                                    target="_blank">
+                                    Bài 1: TĂNG CƯỜNG QUỐC PHÒNG, AN NINH, BẢO VỆ VỮNG CHẮC
+                                    TỔ QUỐC VIỆT NAM XÃ HỘI CHỦ NGHĨA TRONG TÌNH HÌNH MỚI
+                                </a>
+
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 2 HSQ, BS 2026.pdf">
+                                    Bài 2: BẢO VỆ CHỦ QUYỀN BIỂN, ĐẢO VÀ BIÊN GIỚI QUỐC GIA
+                                    NƯỚC CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+                                    TRONG TÌNH HÌNH MỚI
+
+                                </a>
+
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 3 HSQ,BS 2026.pdf">
+                                    Bài 3: GIỮ VỮNG VÀ TĂNG CƯỜNG ĐOÀN KẾT NỘI BỘ, ĐOÀN KẾT QUÂN
+                                    DÂN, ĐOÀN KẾT QUỐC TẾ CỦA QUÂN ĐỘI NHÂN DÂN VIỆT NAM
+                                    MỤC ĐÍCH, YÊU CẦU
+                                </a>
+
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 4 HSQ,BS 2026.pdf">
+                                    Bài 4: XÂY DỰNG VÀ PHÁT HUY GIÁ TRỊ VĂN HÓA, SỨC MẠNH
+                                    CON NGƯỜI VIỆT NAM VÀ GIÁ TRỊ VĂN HÓA “BỘ ĐỘI CỤ HỒ”
+                                    TRONG TÌNH HÌNH MỚI
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 5 HSQ, BS 2026.pdf">
+                                    Bài 5: XÂY DỰNG QUÂN ĐỘI NHÂN DÂN VIỆT NAM CÁCH MẠNG,
+                                    CHÍNH QUY, TINH NHUỆ, HIỆN ĐẠI</a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 6 HSQ, BS 2026.pdf">
+                                    Bài 6: XÂY DỰNG NHÀ NƯỚC PHÁP QUYỀN
+                                    XÃ HỘI CHỦ NGHĨA VIỆT NAM HIỆN NAY
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 7 HSQ, BS 2026.pdf">
+                                    Bài 7: QUAN ĐIỂM, CHÍNH SÁCH DÂN TỘC, TÔN GIÁO
+                                    CỦA ĐẢNG VÀ NHÀ NƯỚC TA HIỆN NAY
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 8 HSQ, BS 2026.pdf">
+                                    Bài 8: ĐƯỜNG LỐI, CHÍNH SÁCH ĐỐI NGOẠI
+                                    CỦA ĐẢNG VÀ NHÀ NƯỚC TA HIỆN NAY
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 9 HSQ, BS 2026.pdf">
+                                    Bài 9: QUAN ĐIỂM CỦA ĐẢNG VỀ ĐỐI TÁC, ĐỐI TƯỢNG
+                                    CỦA CÁCH MẠNG VIỆT NAM TRONG TÌNH HÌNH MỚI
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 10 HSQ, BS 2026.pdf">
+                                    Bài 10: ĐẤU TRANH LÀM THẤT BẠI ÂM MƯU, THỦ ĐOẠN “DIỄN BIẾN HÒA
+                                    BÌNH”, BẠO LOẠN LẬT ĐỔ CỦA CÁC THẾ LỰC THÙ ĐỊCH CHỐNG
+                                    PHÁ CÁCH MẠNG VIỆT NAM HIỆN NAY
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 11 HSQ, BS 2026.pdf">
+                                    Bài 11: CÔNG TÁC VẬN ĐỘNG QUẦN CHÚNG, THAM GIA XÂY DỰNG CƠ
+                                    SỞ VỮNG MẠNH CỦA CÁN BỘ, CHIẾN SĨ TRONG QUÂN ĐỘI HIỆN
+                                    NAY
+                                </a>
+                                <a href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/Bài 12 HSQ, BS 2026.pdf">
+                                    Bài 12: XÂY DỰNG VÀ HUY ĐỘNG LỰC LƯỢNG DỰ BỊ ĐỘNG VIÊN ĐÁP
+                                    ỨNG YÊU CẦU NHIỆM VỤ BẢO VỆ TỔ QUỐC TRONG TÌNH HÌNH
+                                    MỚI
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="submenu-item">
+                            <a href="#">Bài giảng Chính trị CS năm 2 ▶</a>
+                            <div class="submenu-level2">
+                                <a
+                                    href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 6 Xây dựng Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam hiện nay.pdf">
+                                    Bài 6: XÂY DỰNG NHÀ NƯỚC PHÁP QUYỀN
+                                    XÃ HỘI CHỦ NGHĨA VIỆT NAM HIỆN NAY
+                                </a>
+
+                                <a
+                                    href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 7  Quan điểm, chính sách dân tộc, tôn giáo của Đảng và Nhà nước ta hiện nay.pdf">
+                                    Bài 7: QUAN ĐIỂM, CHÍNH SÁCH DÂN TỘC, TÔN GIÁO CỦA ĐẢNG VÀ NHÀ NƯỚC TA HIỆN NAY
+                                </a>
+
+                                <a
+                                    href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 8 Đường lối, chính sách đối ngoại của Đảng và Nhà nước ta hiện nay.pdf">
+                                    Bài 8: ĐƯỜNG LỐI, CHÍNH SÁCH ĐỐI NGOẠI CỦA ĐẢNG VÀ NHÀ NƯỚC TA HIỆN NAY
+                                </a>
+
+                                <a
+                                    href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 9 “Quan điểm của Đảng về đối tác, đối tượng của cách mạng Việt Nam trong tình hình mới”.pdf">
+                                    Bài 9: QUAN ĐIỂM CỦA ĐẢNG VỀ ĐỐI TÁC, ĐỐI TƯỢNG CỦA CÁCH MẠNG VIỆT NAM TRONG
+                                    TÌNH
+                                    HÌNH MỚI
+                                </a>
+                                <a
+                                    href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 10 Đấu tranh làm thất bại âm mưu, thủ đoạn “diễn biến hòa bình”, bạo loạn lật đổ của các thế lực thù địch chống phá cách mạng Việt Nam hiện nay.pdf">
+                                    Bài 10: ĐẤU TRANH LÀM THẤT BẠI ÂM MƯU, THỦ ĐOẠN “DIỄN BIẾN HÒA BÌNH”, BẠO LOẠN
+                                    LẬT
+                                    ĐỔ CỦA CÁC THẾ LỰC THÙ ĐỊCH CHỐNG PHÁ CÁCH MẠNG VIỆT NAM HIỆN NAY
+                                </a>
+                                <a
+                                    href="sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 11 Công tác vận động quần chúng, tham gia xây dựng cơ sở vững mạnh của cán bộ, chiến sĩ trong Quân đội hiện nay.pdf">
+                                    Bài 11: CÔNG TÁC VẬN ĐỘNG QUẦN CHÚNG, THAM GIA XÂY DỰNG CƠ SỞ VỮNG MẠNH CỦA CÁN
+                                    BỘ,
+                                    CHIẾN SĨ TRONG QUÂN ĐỘI HIỆN NAY
+                                </a>
+                            </div>
+                        </div>
+                        <a href="#">Chuyên đề</a>
+                        <a href="#">Tọa đàm</a>
+                    </div>
+                    <div class="column">
+
+                        <h3>Hậu cần kĩ thuật</h3>
+                        <div class="submenu-item">
+
+                            <a href="#">An toàn lao động ▶</a>
+
+                            <div class="submenu-level2">
+
+                                <a href="sohoa/hckt/ATLĐ/CÁC NGHỊ ĐỊNH CỦA CHÍNH PHỦ QUY ĐỊNH, HƯỚNG DẪN THI HÀNH LUẬT AN TOÀN, VỆ SINH LAO ĐỘNG.pdf"
+                                    target="_blank">
+                                    CÁC NGHỊ ĐỊNH CỦA CHÍNH PHỦ QUY ĐỊNH, HƯỚNG DẪN THI HÀNH LUẬT AN TOÀN, VỆ SINH
+                                    LAO
+                                    ĐỘNG
+                                </a>
+
+                                <a
+                                    href="sohoa/hckt/ATLĐ/CÁCH NHẬN BIẾT CÁC YẾU TỐ NGUY HIỂM, YẾU TỐ CÓ HẠI TẠI NƠI LÀM VIỆC.pdf">
+                                    CÁCH NHẬN BIẾT CÁC YẾU TỐ NGUY HIỂM, YẾU TỐ CÓ HẠI TẠI NƠI LÀM VIỆC
+                                </a>
+
+                                <a href="sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT LUẬT, NGHỊ ĐỊNH.pdf">
+                                    GIỚI THIỆU TÓM TẮT LUẬT, NGHỊ ĐỊNH
+                                </a>
+
+                                <a
+                                    href="sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT THÔNG TƯ, VĂN BẢN HƯỚNG DẪN CỦA BỘ QUỐC PHÒNG VỀ AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
+                                    GIỚI THIỆU TÓM TẮT THÔNG TƯ, VĂN BẢN HƯỚNG DẪN CỦA BỘ QUỐC PHÒNG VỀ AN TOÀN, VỆ
+                                    SINH
+                                    LAO ĐỘNG
+                                </a>
+                                <a href="sohoa/hckt/ATLĐ/MỘT SỐ GIẢI PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG.pdf">MỘT SỐ
+                                    GIẢI
+                                    PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG</a>
+                            </div>
+                        </div>
+
+
+                        <div class="submenu-item">
+
+                            <a href="#">Văn bản hậu cần ▶ </a>
+
+                            <div class="submenu-level2">
+
+                                <a href="sohoa/hckt/VB hậu cần/tiêu chuẩn chế độ hậu cần.pdf" target="_blank">
+                                    TIÊU CHUẨN CHẾ ĐỘ HẬU CẦN
+                                </a>
+
+                                <a href="sohoa/hckt/VB hậu cần/quân nhu/Công tác QN dã ngoại-SSCĐ.pdf">
+                                    CÔNG TÁC QN DÃ NGOẠI-SSCĐ
+                                </a>
+
+                                <a href="sohoa/hckt/VB hậu cần/quân nhu/Công tác Tăng gia sản xuất e24 năm 2026.pdf">
+                                    CÔNG TÁC TĂNG GIA SẢN XUẤT
+                                </a>
+
+                                <a href="sohoa/hckt/VB hậu cần/quân nhu/Mot so rau dai an duoc o Viet Nam-16(1).pdf">
+                                    MỘT SỐ RAU DẠI ĂN ĐƯỢC Ở VIỆT NAM
+                                </a>
+                                <a href="sohoa/hckt/ATLĐ/MỘT SỐ GIẢI PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG.pdf">MỘT SỐ
+                                    GIẢI
+                                    PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG</a>
+                            </div>
+                        </div>
+                        <div class="submenu-item">
+
+                            <a href="#">Văn bản kĩ thuật ▶ </a>
+
+                            <div class="submenu-level2">
+
+                                <a href="sohoa/hckt/VB kỹ thuật/Các bước thực hiện ngày kỹ thuật điều chỉnh.pdf"
+                                    target="_blank">
+                                    CÁC BƯỚC THỰC HIỆN NGÀY KỸ THUẬT ĐIỀU CHỈNH
+                                </a>
+
+                                <a href="sohoa/hckt/VB kỹ thuật/HD 15 PKT.pdf">
+                                    QUẢN LÝ, SỰ DỤNG SẮP XẾP VŨ KHÍ, ĐẠN VÀ DỰ TRỮ ĐẠN BẢO ĐẢM CHO NHIỆM VỤ SSCĐ
+                                </a>
+
+                                <a href="sohoa/hckt/VB kỹ thuật/HDND BQVKBB ngày, tuần.pdf">
+                                    BẢO QUẢN HÀNG NGÀY ĐỐI VỚI CÁC LOẠI TBKT
+                                </a>
+
+                                <a href="sohoa/hckt/VB kỹ thuật/Hướng dẫn sắp xếp tủ súng K22 sửa.pdf">
+                                    HƯỚNG DẪN SẮP XẾP TỦ SÚNG K22
+                                </a>
+                                <a href="sohoa/hckt/VB kỹ thuật/Quy dinh 725 va cong van so 451.pdf">QUY ĐỊNH 725 VÀ
+                                    CÔNG VĂN SỐ 451</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h3>Chuyển đổi số</h3> <a href="#">Văn bản mới</a> <a href="#">Lịch công tác</a> <a href="#">Kho
+                            PDF</a> <a href="#">Kho Word</a>
+                    </div>
+
+            </li>
+            <li><a href="#">
+                    <i class="fa-solid fa-newspaper"></i> Tin tức</a></li>
+            <li><a href="#">
+                    <i class="fa-solid fa-book-open"></i> Thư viện</a></li>
+            <li><a href="#">
+                    <i class="fa-solid fa-address-book"></i> Liên hệ</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <aside>
+            <h2>📌 DANH MỤC</h2>
+            <ul>
+                <li>
+                    <a href="lichcongtac.html">📅 Lịch công tác</a>
+                </li>
+                <li>
+                    <a href="thongbao.html">📢 Thông báo mới</a>
+                </li>
+                <li>
+                    <a href="vanban.html">📄 Văn bản</a>
+                </li>
+                <li>
+                    <a href="thuvien.html">📷 Hình ảnh</a>
+                </li>
+                <li>
+                    <a href="thuvien.html">🎥 Video</a>
+                </li>
+                <li>
+                    <a href="thuvien.html">📚 Tài liệu</a>
+                </li>
+            </ul>
+        </aside>
+        <main id="main-content">
+            <div class="card">
+                <h2>📢 THÔNG BÁO</h2>
+                <p> Đây là khu vực đăng các thông báo mới nhất của đơn vị. </p>
             </div>
-
-            <button type="submit">Đăng nhập</button>
-        </form>
-        <script>
-            function login() {
-
-                const username =
-                    document.getElementById("username").value;
-
-                const password =
-                    document.getElementById("password").value;
-
-                const error =
-                    document.getElementById("error-message");
-
-                if (username === "thuviene24" &&
-                    password === "trungdung24021946") {
-
-                    error.style.display = "block";
-                    error.style.color = "#1f3b2d";
-                    error.style.background = "#e8f5e9";
-                    error.style.border = "1px solid #a5d6a7";
-                    error.innerHTML = "✓ Chào mừng đến với Cổng Thông Tin Trung đoàn 24";
-
-                    setTimeout(() => {
-                        window.location.href = "login.html";
-                    }, 2000);
-
-                    return false;
-                }
-            }
-        </script>
+            <div class="card">
+                <h2>📰 TIN TỨC</h2>
+                <p> Cập nhật hoạt động, huấn luyện, phong trào thi đua và các nội dung nổi bật. </p>
+            </div>
+            <div class="card">
+                <h2>📚 VĂN BẢN MỚI</h2>
+                <ul>
+                    <li>📄 Kế hoạch tháng</li>
+                    <li>📄 Thông báo</li>
+                    <li>📄 Hướng dẫn</li>
+                    <li>📄 Quyết định</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+    <footer> © 2026 CỔNG THÔNG TIN NỘI BỘ </footer>
 </body>
 
 </html>
