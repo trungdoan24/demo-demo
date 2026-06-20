@@ -80,6 +80,21 @@ header {
     animation: fadeInUp 0.8s ease 0.2s backwards;
 }
 
+.banner-header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 0;
+    background: #123b2c;
+}
+
+.banner-header img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 @keyframes slideDown {
     from {
         opacity: 0;
@@ -798,6 +813,21 @@ footer {
     }
 }
 
+.banner-header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 0;
+    background: #123b2c;
+}
+
+.banner-header img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
 @media screen and (max-width: 480px) {
     .top h1 {
         font-size: 18px;
@@ -822,6 +852,21 @@ footer {
     .search-container {
         min-width: 100px;
     }
+}
+
+.banner-header {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    line-height: 0;
+    background: #123b2c;
+}
+
+.banner-header img {
+    display: block;
+    width: 100%;
+    height: auto;
 }
 
 /* ===================== */

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Đăng Nhập - CỔNG THÔNG TIN TRUNG ĐOÀN 24</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* LOGIN PAGE STYLES */
+        body.login-page {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body.login-page header {
+            flex-shrink: 0;
+        }
+
+        body.login-page nav {
+            flex-shrink: 0;
+        }
+
+        body.login-page .breadcrumb {
+            display: none;
+        }
+
+        .login-wrapper {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, rgba(31, 59, 45, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+        }
+
+        .login-container {
+            background: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: 15px;
+            box-shadow: var(--shadow-lg);
+            max-width: 450px;
+            width: 100%;
+            border-left: 5px solid var(--accent-color);
+            animation: slideUp 0.5s ease;
+        }
+
+        .login-container h2 {
+            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .login-container .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            background: var(--card-bg);
+            color: var(--text-color);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        .checkbox-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 13px;
+        }
+
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .checkbox-group a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .checkbox-group a:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(31, 59, 45, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c62828;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c62828;
+            display: none;
+            animation: shake 0.5s ease;
+        }
+
+        .success-message {
+            background: #efe;
+            color: #2e7d32;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2e7d32;
+            display: none;
+            animation: slideUp 0.5s ease;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            gap: 10px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-color);
+        }
+
+        .back-link {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .back-link a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0);
+            }
+
+            10%,
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: translateX(-5px);
+            }
+
+            20%,
+            40%,
+            60%,
+            80% {
+                transform: translateX(5px);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        body.login-page footer {
+            margin-top: auto;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 35px 25px;
+            }
+
+            .login-container h2 {
+                font-size: 22px;
+            }
+
+            .login-wrapper {
+                padding: 20px 15px;
+            }
+        }
+    </style>
+    <script src="script.js" defer></script>
+</head>
+
+<body class="login-page">
+    <header>
+        <section class="hero">
+            <div class="hero-box">
+                <h2>TRUNG ĐOÀN 24 - TRUNG DŨNG</h2>
+                <p>Chính quy • Tinh nhuệ • Hiện đại</p>
+            </div>
+        </section>
+        <div class="top">
+            <h1>🇻🇳 CỔNG THÔNG TIN TRUNG ĐOÀN 24</h1>
+            <p>Hệ thống quản lý - Điều hành - Chia sẻ tài liệu</p>
+        </div>
+    </header>
+
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="login.html"><i class="fa-solid fa-house"></i> Trang Chủ</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-bell"></i> Thông báo</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-right-to-bracket"></i> Đăng nhập</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Tìm kiếm...">
+            <button id="search-btn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <button class="dark-mode-toggle" id="dark-mode-btn" title="Chế độ tối">
+            <i class="fa-solid fa-moon"></i>
+        </button>
+    </nav>
+
+    <div class="login-wrapper">
+        <div class="login-container">
+            <h2><i class="fa-solid fa-lock"></i> Đăng Nhập</h2>
+            <p class="subtitle">Vui lòng nhập tài khoản và mật khẩu để tiếp tục</p>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username"><i class="fa-solid fa-user"></i> Tài khoản</label>
+                    <input type="text" id="username" placeholder="Nhập tài khoản của bạn" required
+                        autocomplete="username">
+                </div>
+
+                <div class="form-group">
+                    <label for="password"><i class="fa-solid fa-key"></i> Mật khẩu</label>
+                    <input type="password" id="password" placeholder="Nhập mật khẩu của bạn" required
+                        autocomplete="current-password">
+                </div>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="rememberMe">
+                        Ghi nhớ tôi
+                    </label>
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <i class="fa-solid fa-sign-in-alt"></i> Đăng Nhập
+                </button>
+            </form>
+
+            <div class="divider">Hoặc</div>
+
+            <div class="back-link">
+                <p>Chưa có tài khoản? <a href="login.html">Quay lại trang chủ</a></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-shield"></i> An Ninh</h3>
+                <p>Hệ thống được bảo vệ bằng mã hóa và các biện pháp bảo mật tiên tiến.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-headset"></i> Hỗ Trợ</h3>
+                <p>Email: thuviene24@gmail.com</p>
+                <p>Hotline: (028) XXXX-XXXX</p>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-info-circle"></i> Thông Tin</h3>
+                <a href="#">Chính sách bảo mật</a>
+                <a href="#">Điều khoản sử dụng</a>
+                <a href="#">Hướng dẫn sử dụng</a>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-share-nodes"></i> Liên Kết</h3>
+                <div class="social-links">
+                    <a href="#" title="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="#" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2026 Trung Đoàn 24 - Trung Dũng. Bảo lưu mọi quyền.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const rememberMeCheckbox = document.getElementById('rememberMe');
+
+            // Credentials
+            const VALID_USERNAME = 'thuviene24';
+            const VALID_PASSWORD = 'trungdung24021946';
+
+            // Load saved username if exists
+            window.addEventListener('load', function () {
+                const savedUsername = localStorage.getItem('savedUsername');
+                if (savedUsername) {
+                    usernameInput.value = savedUsername;
+                    rememberMeCheckbox.checked = true;
+                    passwordInput.focus();
+                }
+            });
+
+            loginForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const username = usernameInput.value.trim();
+                const password = passwordInput.value;
+
+                // Clear previous messages
+                errorMessage.style.display = 'none';
+                successMessage.style.display = 'none';
+
+                // Validate inputs
+                if (!username) {
+                    showError('Vui lòng nhập tài khoản');
+                    return;
+                }
+
+                if (!password) {
+                    showError('Vui lòng nhập mật khẩu');
+                    return;
+                }
+
+                // Check credentials
+                if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+                    // Save username if checkbox is checked
+                    if (rememberMeCheckbox.checked) {
+                        localStorage.setItem('savedUsername', username);
+                    } else {
+                        localStorage.removeItem('savedUsername');
+                    }
+
+                    // Store login state
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loggedInUser', username);
+                    localStorage.setItem('loginTime', new Date().toISOString());
+
+                    showSuccess('Đăng nhập thành công! Đang chuyển hướng...');
+
+                    // Redirect after 1.5 seconds
+                    setTimeout(function () {
+                        window.location.href = 'login.html?login=success';
+                    }, 1500);
+                } else {
+                    showError('Tài khoản hoặc mật khẩu không chính xác');
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            });
+
+            function showError(message) {
+                errorMessage.textContent = message;
+                errorMessage.style.display = 'block';
+                setTimeout(function () {
+                    errorMessage.style.display = 'none';
+                }, 5000);
+            }
+
+            function showSuccess(message) {
+                successMessage.textContent = message;
+                successMessage.style.display = 'block';
+            }
+
+            // Allow Enter key to submit
+            usernameInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    passwordInput.focus();
+                }
+            });
+
+            passwordInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') {
+                    loginForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
