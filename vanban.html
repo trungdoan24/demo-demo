@@ -4,353 +4,337 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kho Văn Bản - Trung đoàn 24</title>
+    <title>Kho Văn Bản - Trung Đoàn 24</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
-        }
-
+        /* VANBAN PAGE SPECIFIC STYLES */
         body {
-            background: linear-gradient(135deg, #f5f7fa, #e8f5e9);
-            min-height: 100vh;
+            background: var(--bg-color);
+            color: var(--text-color);
         }
 
-        /* Header */
-        header {
-            position: relative;
-            overflow: hidden;
-            background: #1f3b2d;
-            color: white;
-            text-align: center;
-            padding: 35px 20px;
-            border-bottom: 4px solid #d4af37;
-            text-align: center;
-            color: white;
-
-            padding: 30px 20px 80px;
+        .vanban-container {
+            display: flex;
+            gap: 25px;
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
-        /* Trống đồng nền */
-        header::before {
-            content: "";
-
-            position: absolute;
-            inset: 0;
-
-
-            opacity: .08;
-
-            animation: rotateScale 20s ease-in-out infinite;
+        .vanban-sidebar {
+            width: 280px;
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid var(--accent-color);
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
         }
 
-        @keyframes rotateScale {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-
-            50% {
-                transform: scale(1.08) rotate(3deg);
-            }
-
-            100% {
-                transform: scale(1) rotate(0deg);
-            }
+        .vanban-sidebar h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .header-content {
-            position: relative;
-            z-index: 2;
+        .category-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .logo {
-            width: 90px;
+        .category-list li {
             margin-bottom: 10px;
         }
 
-        .main-title {
-            display: inline-block;
-
-            background: #0047d7;
-
-            padding: 8px 20px;
-
-            border-radius: 4px;
-
-            box-shadow: 0 4px 0 #00296f;
-
-            margin-bottom: 25px;
+        .category-list button {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 10px 12px;
+            text-align: left;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-color);
         }
 
-        .main-title h1 {
-            font-size: 42px;
+        .category-list button:hover {
+            background: var(--secondary-color);
             color: white;
-            margin: 0;
+            padding-left: 16px;
         }
 
-        .search-box {
-            max-width: 900px;
-            margin: auto;
+        .category-list button.active {
+            background: var(--primary-color);
+            color: white;
+            border-left: 4px solid var(--accent-color);
+            padding-left: 12px;
         }
 
-        .search-row {
+        .vanban-main {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-section {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-wrapper {
             display: flex;
             gap: 10px;
         }
 
-        .search-row input {
+        .search-wrapper input {
             flex: 1;
-            height: 58px;
-
-            border: none;
-            border-radius: 10px;
-
-            padding: 0 20px;
-
-            font-size: 18px;
-        }
-
-        .search-row button {
-            border: none;
-
-            background: #0065ff;
-            color: white;
-
-            padding: 0 25px;
-
+            padding: 12px 16px;
+            border: 2px solid var(--secondary-color);
             border-radius: 8px;
-
-            cursor: pointer;
-
-            font-size: 18px;
+            font-size: 14px;
+            background: var(--input-bg);
+            color: var(--text-color);
+            transition: all 0.3s ease;
         }
 
-        .search-options {
-            margin-top: 15px;
-
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-
-            color: white;
-        }
-
-        .search-options label {
-            cursor: pointer;
-        }
-
-        header h1 {
-            position: relative;
-            display: inline-block;
-            font-size: 34px;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        header h1::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: -8px;
-            width: 0;
-            height: 3px;
-            background: #fff;
-            transform: translateX(-50%);
-            animation: lineGrow 1.2s ease forwards;
-        }
-
-        @keyframes lineGrow {
-            to {
-                width: 100%;
-            }
-        }
-
-        header p {
-            opacity: .9;
-        }
-
-        /* Menu */
-        nav {
-            background: transparent;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            padding: 12px;
-            position: relative;
-            margin-top: -60px;
-            /* kéo menu đè lên header */
-            z-index: 10;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 30px;
-            transition: .3s;
-        }
-
-        nav a:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
-        /* Nội dung */
-        .container {
-            max-width: 1200px;
-            margin: 30px auto;
-            padding: 20px;
-        }
-
-        .title {
-            text-align: center;
-            color: #1f3b2d;
-            margin-bottom: 25px;
-            font-size: 32px;
-        }
-
-        /* Search */
-        #searchInput {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 50px;
-            font-size: 16px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .08);
-            margin-bottom: 30px;
+        .search-wrapper input:focus {
             outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(31, 59, 45, 0.1);
         }
 
-        #searchInput:focus {
-            box-shadow: 0 0 0 4px rgba(0, 153, 77, .2);
+        .search-wrapper button {
+            padding: 12px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
-        /* Khối danh mục */
-        .category {
-            background: white;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
-            animation: fadeUp .8s ease;
-            transition: .3s;
+        .search-wrapper button:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
-        .category:hover {
-            transform: translateY(-5px);
+        .result-count {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 10px;
+            font-weight: 500;
         }
 
-        .category h2 {
-            color: #1f3b2d;
-            border-left: 6px solid #1f3b2d;
-            padding-left: 10px;
-            margin-bottom: 15px;
+        .document-category {
+            margin-bottom: 40px;
+            display: none;
         }
 
-        .category h3 {
-            margin: 20px 0 10px;
-            color: #444;
+        .document-category.active {
+            display: block;
+            animation: fadeInUp 0.4s ease;
         }
 
-        /* Danh sách */
-        .document-list {
-            list-style: none;
-        }
-
-        .document-list li {
-            margin-bottom: 8px;
-        }
-
-        .document-list a {
+        .category-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
             display: flex;
             align-items: center;
             gap: 10px;
-            text-decoration: none;
-            color: #333;
-            background: #f8f9fa;
-            padding: 12px 15px;
+        }
+
+        .category-title i {
+            color: var(--accent-color);
+            font-size: 20px;
+        }
+
+        .subcategory-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--secondary-color);
+            margin-top: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--secondary-color);
+            opacity: 0.8;
+        }
+
+        .subcategory-title i {
+            color: var(--accent-color);
+            font-size: 16px;
+        }
+
+        .document-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .document-item {
+            background: var(--card-bg);
+            padding: 15px;
+            margin-bottom: 12px;
             border-radius: 10px;
-            transition: .3s;
+            border-left: 4px solid var(--accent-color);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
-        .document-list a:hover {
-            background: #e8f5e9;
-            color: #006633;
-            transform: translateX(8px);
-            box-shadow: 0 5px 15px rgba(0, 153, 77, .15);
+        .document-item:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-md);
         }
 
-        /* Footer */
-        footer {
-            background: #1f3b2d;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
+        .document-item a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
 
-        /* Animation */
-        @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .document-item a:hover {
+            color: var(--primary-color);
         }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Mobile */
-        @media(max-width:768px) {
-
-            header h1 {
-                font-size: 26px;
-            }
-
-            .title {
-                font-size: 24px;
-            }
-
-            nav {
-                flex-wrap: wrap;
-            }
+        .document-icon {
+            min-width: 20px;
+            color: var(--accent-color);
+            font-size: 16px;
         }
 
         .folder-link {
-            display: block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: linear-gradient(135deg, rgba(31, 59, 45, 0.1), rgba(212, 175, 55, 0.05));
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
             text-decoration: none;
-            color: #222;
-            background: #f5f5f5;
-            padding: 12px 15px;
-            border-radius: 10px;
-            transition: all .3s ease;
+            color: var(--primary-color);
             font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            margin-bottom: 12px;
         }
 
         .folder-link:hover {
-            background: #0066ff;
+            background: var(--primary-color);
             color: white;
-            transform: translateX(5px);
-            box-shadow: 0 5px 15px rgba(0, 102, 255, .3);
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .folder-link i {
+            font-size: 16px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .vanban-container {
+                flex-direction: column;
+            }
+
+            .vanban-sidebar {
+                width: 100%;
+                position: static;
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .vanban-sidebar h3 {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .category-list {
+                display: flex;
+                gap: 8px;
+                flex-wrap: wrap;
+                width: 100%;
+            }
+
+            .category-list li {
+                margin-bottom: 0;
+            }
+
+            .category-list button {
+                padding: 8px 12px;
+                font-size: 13px;
+                flex: 0 1 auto;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vanban-container {
+                margin: 20px auto;
+            }
+
+            .search-wrapper {
+                flex-direction: column;
+            }
+
+            .search-wrapper button {
+                width: 100%;
+            }
+
+            .category-title {
+                font-size: 18px;
+            }
+
+            .subcategory-title {
+                font-size: 14px;
+            }
+
+            .document-item a {
+                font-size: 14px;
+            }
+        }
+
+        body.dark-mode {
+            --input-bg: #2a2a2a;
+        }
+
+        body:not(.dark-mode) {
+            --input-bg: #f5f7fa;
         }
     </style>
 </head>
@@ -358,357 +342,389 @@
 <body>
 
     <header>
-        <h1>KHO VĂN BẢN TRUNG ĐOÀN 24</h1>
-        <p>Tra cứu - Quản lý - Khai thác tài liệu</p>
+        <div class="header-content">
+            <h1><i class="fa-solid fa-file-lines"></i> KHO VĂN BẢN TRUNG ĐOÀN 24</h1>
+            <p>Tra cứu • Quản lý • Khai thác tài liệu học tập và công tác</p>
+        </div>
     </header>
 
-    <nav>
-        <a href="login.html">
-            <i class="fa-solid fa-house"></i>
-            Trang chủ</a>
-        <a href="vanban.html">
-            <i class="fa-solid fa-folder"></i> Văn bản</a>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <ul class="menu">
+                <li>
+                    <a href="login.html">
+                        <i class="fa-solid fa-house"></i> Trang Chủ
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-bell"></i> Thông báo</a>
+                </li>
+                <li class="mega" id="vanban-menu">
+                    <a href="vanban.html" class="protected-link" onclick="return checkLoginForDocument(event)">
+                        <i class="fa-solid fa-folder"></i> Văn bản
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html"><i class="fa-solid fa-right-to-bracket"></i> <span id="loginBtnText">Đăng
+                            nhập</span></a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="search-input" placeholder="Tìm kiếm...">
+            <button id="search-btn"><i class="fa-solid fa-search"></i></button>
+        </div>
+
+        <button class="dark-mode-toggle" id="dark-mode-btn" title="Chế độ tối">
+            <i class="fa-solid fa-moon"></i>
+        </button>
     </nav>
 
-    <div class="container">
+    <div class="breadcrumb">
+        <span><i class="fa-solid fa-house"></i></span>
+        <span>/</span>
+        <a href="login.html">Trang chủ</a>
+        <span>/</span>
+        <span>Kho Văn Bản</span>
+    </div>
 
-        <h1 class="title">Danh mục văn bản</h1>
-        <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm văn bản..." autocomplete="off">
-        <p id="resultCount"></p>
-        <div class="category">
-            <h2> Quân sự</h2>
-            <h3>
-                Điều lệnh đội ngũ
-            </h3>
-            <ul class="document-list">
-                <li>
-                    <a href="sohoa/dieulenhdoingu/1. ĐLĐN (TẬP BÀI GIẢNG-TẬP 1) XB 2014.pdf">
-                        📄 Quy định chung của Điều lệnh đội ngũ
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/dieulenhdoingu/2. ĐLĐN-TNCS STV380, STV 215.pdf">
-                        📄 ĐLĐN-TNCS STV 380, STV 215
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/dieulenhdoingu/3. ĐỘI NGŨ HỎA KHÍ TRỢ CHIẾN AGS-17, RPG-29.pdf">
-                        📄 Đội ngũ hỏa khí trợ chiến AGS-17, RPG-29
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/dieulenhdoingu/4. ĐLĐN- ĐƠN VỊ.pdf">
-                        📄 ĐLĐN Đơn vị
-                    </a>
-                </li>
+    <div class="vanban-container">
+        <!-- Sidebar -->
+        <aside class="vanban-sidebar">
+            <h3><i class="fa-solid fa-list"></i> Danh Mục</h3>
+            <ul class="category-list">
+                <li><button class="category-btn active" onclick="switchCategory('military')">
+                        <i class="fa-solid fa-shield"></i> Quân Sự
+                    </button></li>
+                <li><button class="category-btn" onclick="switchCategory('political')">
+                        <i class="fa-solid fa-book"></i> Chính Trị
+                    </button></li>
+                <li><button class="category-btn" onclick="switchCategory('logistics')">
+                        <i class="fa-solid fa-boxes-stacked"></i> Hậu Cần & Kỹ Thuật
+                    </button></li>
             </ul>
-            <h3>
-                Những chiến lệ
-            </h3>
+        </aside>
 
-            <ul class="document-list">
-                <li>
-                    <a href="sohoa/chienle/TRẬN CHIẾN ĐẤU ĐÁNH ĐIỂM, DIỆT VIỆN PHƯƠNG ĐIẾM – ĐƯỜNG 17.pdf"
-                        target="_blank">
-                        📄 Trận chiến đấu đánh điểm, diệt viện Phương Điếm – Đường 17
-                    </a>
-                </li>
+        <!-- Main Content -->
+        <main class="vanban-main">
+            <div class="search-section">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" placeholder="🔍 Tìm kiếm văn bản...">
+                    <button onclick="searchDocument()"><i class="fa-solid fa-search"></i> Tìm</button>
+                </div>
+                <div class="result-count" id="resultCount"></div>
+            </div>
 
-                <li>
-                    <a href="sohoa/chienle/TRẬN PHỤC KÍCH BẮC CẦU IA TÔVE (ĐƯỜNG 14).pdf" target="_blank">
-                        📄 Trận phục kích Bắc cầu Ia Tôve
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/chienle/TRẬN PHỤC KÍCH ĐAK CHỜ CỦA TIỂU ĐOÀN BỘ BINH 4 ,.pdf" target="_blank">
-                        📄 Trận phục kích Đak Chờ của Tiểu đoàn Bộ binh 4
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/chienle/TRẬN THỌC SÂU ĐÁNH CHIẾM SÂN BAY TÂN SƠN NHẤT CỦA eBB24 TRUNG DŨNG.pdf"
-                        target="_blank">
-                        📄 Trận thọc sâu đánh chiếm sân bay Tân Sơn Nhất của eBB24 Trung Dũng
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/chienle/TRẬN TIẾN CÔNG ĐIỂM  CAO 1227 KON ROC.pdf" target="_blank">
-                        📄 Trận tiến công điểm cao 1227 Kon Roc
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/chienle/TRẬN TẬP KÍCH TRẬN ĐỊA PHÁO 105mm Ở ẤP KON HƠ RING.pdf" target="_blank">
-                        📄 Trận tập kích trận địa pháo 105mm ở ấp Kon Hơ Ring
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/chienle/TRẬN TẬP KÍCH ẤP KON HƠ NÔNG CỦA TIỂU ĐOÀN BỘ BINH 5 (Thiếu), TRUNG ĐOÀN 24 TRUNG DŨNG.pdf"
-                        target="_blank">
-                        📄 Trận tập kích ấp Kon Hơ Nông của Tiểu đoàn Bộ binh 5 (Thiếu), Trung đoàn 24 Trung Dũng
-                    </a>
-                </li>
-            </ul>
-        </div>
+            <!-- CATEGORY: MILITARY -->
+            <section class="document-category active" id="military">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-shield"></i> Quân Sự
+                </h2>
 
-        <div class="category">
-            <h2>Chính trị</h2>
-            <h3>
-                <a href="bgct-hsq-bs.html" class="folder-link">
-                    📂 Bài Giảng Chính trị HSQ, BS năm 1
-                </a>
-            </h3>
-            <h3>
-                <a href="bgct-hsq-bsn2.html" class="folder-link">
-                    📂 Giảng Chính trị HSQ, BS năm 2
-                </a>
-            </h3>
-            <h3>
-                Chuyên đề, luật
-            </h3>
-            <ul class="document-list">
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/LUẬT DÂN QUÂN TỰ VỆ 2019.pdf">
-                        📄 Luật Dân quân tự vệ 2019
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/LUẬT LỰC LƯỢNG DỰ BỊ ĐỘNG VIÊN.pdf">
-                        📄 Luật Lực lượng dự bị động viên
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/LUẬT NGHĨA VỤ QUÂN SỰ 2015.pdf">
-                        📄 Luật Nghĩa vụ quân sự 2015
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/LUẬT QUÂN NHÂN CHUYÊN NGHIỆP, CÔNG NHÂN VÀ VIÊN CHỨC QUỐC PHÒNG 2015.pdf">
-                        📄 Luật Quân nhân chuyên nghiệp, công nhân và viên chức quốc phòng 2015
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/LUẬT QUỐC PHÒNG.pdf">
-                        📄 Luật Quốc phòng
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/LUẬT SỬA ĐỔI BỔ SUNG LUÂT SI QUAN 2024.pdf">
-                        📄 Luật sửa đổi bổ sung Luật sĩ quan 2024
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/NGHỊ ĐỊNH CHẾ ĐỘ TIỀN LƯƠNG CÔNG CHỨC, VIÊN CHỨC VÀ LLVT.pdf">
-                        📄 Nghị định chế độ tiền lương công chức, viên chức và LLVT
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/THƯ VIỆN SỐ 3-6/THÔNG TƯ 143.pdf">
-                        📄 Thông tư 143
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/HỌC TẬP VÀ LÀM THEO TƯ TƯỞNG ĐẠO ĐỨC PHONG CÁCH HỒ CHÍ MINH/CHUYEN DỀ HỌC TẬP VÀ LÀM THEO PHONG CÁCH LÀM VIỆC HỒ CHÍ MINH..pdf">
-                        📄 Học tập và làm theo phong cách làm việc Hồ Chí Minh
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/HỌC TẬP VÀ LÀM THEO TƯ TƯỞNG ĐẠO ĐỨC PHONG CÁCH HỒ CHÍ MINH/CHUYEN DỀ HỌC TẬP VÀ LÀM THEO PHONG CÁCH ỨNG XỬ CỦA HỒ CHÍ MINH..pdf">
-                        📄 Học tập và làm theo phong cách ứng xử của Hồ Chí Minh
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/HỌC TẬP VÀ LÀM THEO TƯ TƯỞNG ĐẠO ĐỨC PHONG CÁCH HỒ CHÍ MINH/CHUYÊN ĐỀ HỌC TẬP VÀ LÀM THEO PHONG CÁCH DIỄN ĐẠT HỒ CHÍ MINH..pdf">
-                        📄 Học tập và làm theo phong cách diễn đạt Hồ Chí Minh
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/HỌC TẬP VÀ LÀM THEO TƯ TƯỞNG ĐẠO ĐỨC PHONG CÁCH HỒ CHÍ MINH/CHUYÊN ĐỀ “ĐẨY MẠNH HỌC TẬP, RÈN LUYỆN ĐẠO ĐỨC CÁCH MẠNG CỦA QUÂN NHÂN, PHẤN ĐẤU XỨNG DANH “BỘ ĐỘI CỤ HỒ” TRONG THỜI KỲ MỚI”..pdf">
-                        📄 Đẩy mạnh học tập, rèn luyện đạo đức cách mạng của quân nhân, phấn đấu xứng danh " Bộ Đội Cụ
-                        Hồ" trong thời kì mới
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/HỌC TẬP VÀ LÀM THEO TƯ TƯỞNG ĐẠO ĐỨC PHONG CÁCH HỒ CHÍ MINH/HỌC TẬP VÀ LÀM THEO TƯ TƯỞNG, ĐẠO ĐỨC, PHONG CÁCH HỒ CHÍ MINH TRỞ THÀNH NHU CẦU TỰ THÂN CỦA CÁN BỘ, ĐẢNG VIÊN, QUẦN CHÚNG TRONG QUÂN ĐỘI HIỆN NAY.pdf">
-                        📄 Học tập và làm theo tư tưởng, đạo đức, phong cách Hồ Chí Minh trở thành nhu cầu tự thân của
-                        cán
-                        bộ, đảng viên, quần chúng trong quân đội hiện nay
-                    </a>
-                </li>
-            </ul>
-            </ul>
-            <h3>
-                Tọa đàm, diễn đàn
-            </h3>
-            <ui class="document-list">
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn than niên với chủ đề Khát vọng thanh niên, đưa Sư đoàn vươn tới danh hiệu anh hùng lần thứ 3/kế hoạch.pdf">
-                        📄 Diễn đàn than niên với chủ đề Khát vọng thanh niên, đưa Sư đoàn vươn tới danh hiệu anh
-                        hùng(Kế Hoạch)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn than niên với chủ đề Khát vọng thanh niên, đưa Sư đoàn vươn tới danh hiệu anh hùng lần thứ 3/kịch bản.pdf">
-                        📄 Diễn đàn than niên với chủ đề Khát vọng thanh niên, đưa Sư đoàn vươn tới danh hiệu anh
-                        hùng
-                        (Kịch Bản)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn Thanh niên  _Tuổi trẻ Trung đoàn học tập, noi gương Anh hùng LLVTND Vũ Văn Bình_/KẾ HOẠCH.pdf">
-                        📄 Diễn đàn Thanh niên _Tuổi trẻ Trung đoàn học tập, noi gương Anh hùng LLVTND Vũ Văn Bình_
-                        (Kế
-                        Hoạch)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn Thanh niên  _Tuổi trẻ Trung đoàn học tập, noi gương Anh hùng LLVTND Vũ Văn Bình_/KỊCH BẢN.pdf">
-                        📄 Diễn đàn Thanh niên _Tuổi trẻ Trung đoàn học tập, noi gương Anh hùng LLVTND Vũ Văn Bình_
-                        (Kịch Bản)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề Tuổi tre Trung đoàn 24, bản lĩnh, khát vọng, xung kích sáng tạo, tiên phong, quyết thắng/kế hoạch.pdf">
-                        📄 Diễn đàn thanh niên với chủ đề Tuổi trẻ Trung đoàn 24, bản lĩnh, khát vọng, xung kích
-                        sáng
-                        tạo, tiên phong, quyết thắng (Kế Hoạch)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề Tuổi tre Trung đoàn 24, bản lĩnh, khát vọng, xung kích sáng tạo, tiên phong, quyết thắng/kịch bản.pdf">
-                        📄 Diễn đàn thanh niên với chủ đề Tuổi trẻ Trung đoàn 24, bản lĩnh, khát vọng, xung kích
-                        sáng
-                        tạo, tiên phong, quyết thắng (Kịch Bản)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề tuổi trẻ Trung đoàn 24 giữ lửa truyền thống, thắp sáng tương lai/kế hoạch.pdf">
-                        📄 Diễn đàn thanh niên với chủ đề tuổi trẻ Trung đoàn 24 giữ lửa truyền thống, thắp sáng
-                        tương
-                        lai (Kế Hoạch)
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề tuổi trẻ Trung đoàn 24 giữ lửa truyền thống, thắp sáng tương lai/kịch bản.pdf">
-                        📄 Diễn đàn thanh niên với chủ đề tuổi trẻ Trung đoàn 24 giữ lửa truyền thống, thắp sáng
-                        tương
-                        lai (Kịch Bản)
-                    </a>
-                </li>
-            </ui>
-        </div>
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Điều Lệnh Đội Ngũ
+                </div>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <a href="sohoa/dieulenhdoingu/1. ĐLĐN (TẬP BÀI GIẢNG-TẬP 1) XB 2014.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Quy định chung của Điều lệnh đội ngũ</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/dieulenhdoingu/2. ĐLĐN-TNCS STV380, STV 215.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>ĐLĐN-TNCS STV 380, STV 215</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/dieulenhdoingu/3. ĐỘI NGŨ HỎA KHÍ TRỢ CHIẾN AGS-17, RPG-29.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Đội ngũ hỏa khí trợ chiến AGS-17, RPG-29</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/dieulenhdoingu/4. ĐLĐN- ĐƠN VỊ.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>ĐLĐN Đơn vị</span>
+                        </a>
+                    </li>
+                </ul>
 
-        <div class="category">
-            <h2>An toàn lao động - Hậu cần - Kỹ thuật</h2>
-            <h3>
-                An toàn lao động
-            </h3>
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Những Chiến Lệ
+                </div>
+                <div>
+                    <a href="nhung-chien-le.html" class="folder-link">
+                        <i class="fa-solid fa-folder"></i> Những chiến lệ
+                    </a>
+                </div>
+            </section>
 
-            <ul class="document-list">
-                <li>
-                    <a href="sohoa/hckt/ATLĐ/Chương trình khung HL nhóm 1.pdf">
-                        📄 Chương trình khung HL nhóm 1
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/hckt/ATLĐ/CÁC NGHỊ ĐỊNH CỦA CHÍNH PHỦ QUY ĐỊNH, HƯỚNG DẪN THI HÀNH LUẬT AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
-                        📄 Các nghị định của Chính phủ quy định, hướng dẫn thi hành Luật An toàn, vệ sinh lao động
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/ATLĐ/CÁCH NHẬN BIẾT CÁC YẾU TỐ NGUY HIỂM, YẾU TỐ CÓ HẠI TẠI NƠI LÀM VIỆC.pdf">
-                        📄 Cách nhận biết các yếu tố nguy hiểm, yếu tố có hại tại nơi làm việc
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT LUẬT, NGHỊ ĐỊNH.pdf">
-                        📄 Giới thiệu tóm tắt Luật, Nghị định
-                    </a>
-                </li>
-                <li>
-                    <a
-                        href="sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT THÔNG TƯ, VĂN BẢN HƯỚNG DẪN CỦA BỘ QUỐC PHÒNG VỀ AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
-                        📄 Giới thiệu tóm tắt Thông tư, văn bản hướng dẫn của Bộ Quốc phòng về An toàn, vệ sinh lao
-                        động
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/ATLĐ/MỘT SỐ GIẢI PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG.pdf">
-                        📄 Một số giải pháp cải thiện điều kiện lao động
-                    </a>
-                </li>
-            </ul>
-            <h3>
-                Văn bản hậu cần
-            </h3>
-            <ul class="document-list">
-                <li>
-                    <a href="sohoa/hckt/VB hậu cần/quân nhu/Công tác QN dã ngoại-SSCĐ.pdf">
-                        📄 Công tác quân nhu dã ngoại-SSCĐ
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB hậu cần/quân nhu/Công tác Tăng gia sản xuất e24 năm 2026.pdf">
-                        📄 Công tác Tăng gia sản xuất e24 năm 2026
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB hậu cần/quân nhu/Mot so rau dai an duoc o Viet Nam-16(1).pdf">
-                        📄 Một số rau dại ăn được ở Việt Nam
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB hậu cần/tiêu chuẩn chế độ hậu cần.pdf">
-                        📄 Tiêu chuẩn chế độ hậu cần
-                    </a>
-                </li>
-            </ul>
-            <h3>
-                Văn bản kỹ thuật
-            </h3>
-            <ul class="document-list">
-                <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/Các bước thực hiện ngày kỹ thuật điều chỉnh.pdf">
-                        📄 Các bước thực hiện ngày kỹ thuật điều chỉnh
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/HDND BQVKBB ngày, tuần.pdf">
-                        📄 Hướng dẫn ND BQVKBB ngày, tuần
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/Hướng dẫn sắp xếp tủ súng K22 sửa.pdf">
-                        📄 Hướng dẫn sắp xếp tủ súng K22 sửa
-                    </a>
-                </li>
-                <li>
-                    <a href="sohoa/hckt/VB kỹ thuật/TO CHUC NGAY KT theo 1164.pdf">
-                        📄 Tổ chức ngày KT theo 1164
-                    </a>
-                </li>
-            </ul>
-        </div>
+            <!-- CATEGORY: POLITICAL -->
+            <section class="document-category" id="political">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-book"></i> Chính Trị
+                </h2>
 
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Bài Giảng Chính Trị
+                </div>
+                <div>
+                    <a href="bgct-hsq-bs.html" class="folder-link">
+                        <i class="fa-solid fa-folder"></i> Bài Giảng Chính Trị HSQ, BS Năm 1
+                    </a>
+                </div>
+                <div>
+                    <a href="bgct-hsq-bsn2.html" class="folder-link">
+                        <i class="fa-solid fa-folder"></i> Bài Giảng Chính Trị HSQ, BS Năm 2
+                    </a>
+                </div>
+
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Chuyên Đề & Luật
+                </div>
+                <ul class="document-list">
+                    <div>
+                        <a href="luat.html" class="folder-link">
+                            <i class="fa-solid fa-folder"></i> Luật
+                        </a>
+                    </div>
+                    <div>
+                        <a href="chuyende.html" class="folder-link">
+                            <i class="fa-solid fa-folder"></i> Chuyên đề
+                        </a>
+                    </div>
+                </ul>
+
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Tọa Đàm & Diễn Đàn
+                </div>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn than niên với chủ đề Khát vọng thanh niên, đưa Sư đoàn vươn tới danh hiệu anh hùng lần thứ 3/kế hoạch.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Diễn đàn Khát vọng thanh niên - Kế Hoạch</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn than niên với chủ đề Khát vọng thanh niên, đưa Sư đoàn vươn tới danh hiệu anh hùng lần thứ 3/kịch bản.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Diễn đàn Khát vọng thanh niên - Kịch Bản</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn Thanh niên  _Tuổi trẻ Trung đoàn học tập, noi gương Anh hùng LLVTND Vũ Văn Bình_/KẾ HOẠCH.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tuổi trẻ Trung đoàn học tập Anh hùng Vũ Văn Bình - Kế Hoạch</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn Thanh niên  _Tuổi trẻ Trung đoàn học tập, noi gương Anh hùng LLVTND Vũ Văn Bình_/KỊCH BẢN.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tuổi trẻ Trung đoàn học tập Anh hùng Vũ Văn Bình - Kịch Bản</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề Tuổi tre Trung đoàn 24, bản lĩnh, khát vọng, xung kích sáng tạo, tiên phong, quyết thắng/kế hoạch.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tuổi trẻ Trung đoàn 24 - Bản lĩnh & Khát vọng - Kế Hoạch</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề Tuổi tre Trung đoàn 24, bản lĩnh, khát vọng, xung kích sáng tạo, tiên phong, quyết thắng/kịch bản.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tuổi trẻ Trung đoàn 24 - Bản lĩnh & Khát vọng - Kịch Bản</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề tuổi trẻ Trung đoàn 24 giữ lửa truyền thống, thắp sáng tương lai/kế hoạch.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tuổi trẻ Trung đoàn 24 - Giữ Lửa Truyền Thống - Kế Hoạch</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/THƯ VIỆN SỐ 3-6/TỌA ĐÀM, DIỄN ĐÀN THANH NIÊN/Diễn đàn thanh niên với chủ đề tuổi trẻ Trung đoàn 24 giữ lửa truyền thống, thắp sáng tương lai/kịch bản.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tuổi trẻ Trung đoàn 24 - Giữ Lửa Truyền Thống - Kịch Bản</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- CATEGORY: LOGISTICS -->
+            <section class="document-category" id="logistics">
+                <h2 class="category-title">
+                    <i class="fa-solid fa-boxes-stacked"></i> An Toàn Lao Động - Hậu Cần - Kỹ Thuật
+                </h2>
+
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> An Toàn Lao Động
+                </div>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <a href="sohoa/hckt/ATLĐ/Chương trình khung HL nhóm 1.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Chương trình khung HL nhóm 1</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/hckt/ATLĐ/CÁC NGHỊ ĐỊNH CỦA CHÍNH PHỦ QUY ĐỊNH, HƯỚNG DẪN THI HÀNH LUẬT AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Các nghị định của Chính phủ quy định, hướng dẫn thi hành Luật An toàn, vệ sinh lao
+                                động</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/hckt/ATLĐ/CÁCH NHẬN BIẾT CÁC YẾU TỐ NGUY HIỂM, YẾU TỐ CÓ HẠI TẠI NƠI LÀM VIỆC.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Cách nhận biết các yếu tố nguy hiểm, yếu tố có hại tại nơi làm việc</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT LUẬT, NGHỊ ĐỊNH.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Giới thiệu tóm tắt Luật, Nghị định</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a
+                            href="sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT THÔNG TƯ, VĂN BẢN HƯỚNG DẪN CỦA BỘ QUỐC PHÒNG VỀ AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Thông tư, văn bản hướng dẫn của Bộ Quốc phòng về An toàn, vệ sinh lao động</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/ATLĐ/MỘT SỐ GIẢI PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Một số giải pháp cải thiện điều kiện lao động</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Văn Bản Hậu Cần
+                </div>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB hậu cần/quân nhu/Công tác QN dã ngoại-SSCĐ.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Công tác quân nhu dã ngoại-SSCĐ</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB hậu cần/quân nhu/Công tác Tăng gia sản xuất e24 năm 2026.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Công tác Tăng gia sản xuất e24 năm 2026</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB hậu cần/quân nhu/Mot so rau dai an duoc o Viet Nam-16(1).pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Một số rau dại ăn được ở Việt Nam</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB hậu cần/tiêu chuẩn chế độ hậu cần.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tiêu chuẩn chế độ hậu cần</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <div class="subcategory-title">
+                    <i class="fa-solid fa-arrow-right"></i> Văn Bản Kỹ Thuật
+                </div>
+                <ul class="document-list">
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB kỹ thuật/Các bước thực hiện ngày kỹ thuật điều chỉnh.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Các bước thực hiện ngày kỹ thuật điều chỉnh</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB kỹ thuật/HDND BQVKBB ngày, tuần.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Hướng dẫn ND BQVKBB ngày, tuần</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB kỹ thuật/Hướng dẫn sắp xếp tủ súng K22 sửa.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Hướng dẫn sắp xếp tủ súng K22 sửa</span>
+                        </a>
+                    </li>
+                    <li class="document-item">
+                        <a href="sohoa/hckt/VB kỹ thuật/TO CHUC NGAY KT theo 1164.pdf">
+                            <span class="document-icon">📄</span>
+                            <span>Tổ chức ngày KT theo 1164</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </main>
     </div>
 
     <footer>
-        © 2026 CỔNG THÔNG TIN TRUNG ĐOÀN 24
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-square"></i> Về Cổng Thông Tin</h3>
+                <p>Cổng thông tin nội bộ phục vụ quản lý và khai thác tài liệu của Trung Đoàn 24.</p>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-link"></i> Liên Kết Nhanh</h3>
+                <a href="login.html">Trang Chủ</a>
+                <a href="vanban.html" class="protected-link" onclick="return checkLoginForDocument(event)">Văn Bản</a>
+                <a href="index.html">Đăng Nhập</a>
+                <a href="#">Liên Hệ</a>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-phone"></i> Liên Hệ</h3>
+                <p>Địa chỉ: Trung Đoàn 24, Thành phố Hồ Chí Minh</p>
+                <p>Email: info@trungdoan24.vn</p>
+                <p>Điện thoại: (028) 1234-5678</p>
+            </div>
+
+            <div class="footer-section">
+                <h3><i class="fa-solid fa-share-nodes"></i> Mạng Xã Hội</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 CỔNG THÔNG TIN TRUNG ĐOÀN 24 | Tất cả quyền được bảo lưu</p>
+        </div>
     </footer>
+
+    <script src="script.js"></script>
     <script>
+        // ===========================
+        // VANBAN PAGE SPECIFIC SCRIPT
+        // ===========================
+
         function removeVietnamese(str) {
             return str
                 .normalize("NFD")
@@ -728,44 +744,55 @@
         const searchInput = document.getElementById("searchInput");
 
         function searchDocument() {
-
             const keyword = removeVietnamese(searchInput.value);
-
             let count = 0;
 
-            document.querySelectorAll(".document-list li")
-                .forEach(item => {
+            document.querySelectorAll(".document-item").forEach(item => {
+                const text = removeVietnamese(item.textContent);
+                const abbr = getAbbreviation(text);
+                const found = text.includes(keyword) || abbr.includes(keyword);
 
-                    const text =
-                        removeVietnamese(item.textContent);
-
-                    const abbr =
-                        getAbbreviation(text);
-
-                    const found =
-                        text.includes(keyword) ||
-                        abbr.includes(keyword);
-
-                    item.style.display =
-                        found ? "" : "none";
-
-                    if (found) count++;
-                });
+                item.style.display = found ? "" : "none";
+                if (found) count++;
+            });
 
             document.getElementById("resultCount").textContent =
-                `Tìm thấy ${count} văn bản`;
+                keyword ? `Tìm thấy ${count} văn bản` : "";
         }
 
         let timer;
-
         searchInput.addEventListener("input", () => {
-
             clearTimeout(timer);
-
             timer = setTimeout(searchDocument, 250);
-
         });
+
+        // Category switching
+        function switchCategory(category) {
+            // Hide all categories
+            document.querySelectorAll(".document-category").forEach(cat => {
+                cat.classList.remove("active");
+            });
+
+            // Deactivate all buttons
+            document.querySelectorAll(".category-btn").forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            // Show selected category
+            const categoryElement = document.getElementById(category);
+            if (categoryElement) {
+                categoryElement.classList.add("active");
+            }
+
+            // Activate clicked button
+            event.target.closest("button").classList.add("active");
+
+            // Clear search
+            searchInput.value = "";
+            document.getElementById("resultCount").textContent = "";
+        }
     </script>
+
 </body>
 
 </html>
