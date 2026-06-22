@@ -2,90 +2,108 @@
 
 # ================= COLORS =================
 GREEN="\e[32m"
+CYAN="\e[36m"
 RED="\e[31m"
 YELLOW="\e[33m"
-BLUE="\e[34m"
-CYAN="\e[36m"
 RESET="\e[0m"
 
-# ================= SPINNER ANIMATION =================
-spinner() {
-  pid=$1
-  msg=$2
+# ================= FULL SCREEN CLEAR =================
+clear
+printf '\e[8;40;120t'  # resize terminal (nếu terminal hỗ trợ)
 
-  frames=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
-
-  i=0
-  while kill -0 $pid 2>/dev/null; do
-    frame=${frames[$((i % 10))]}
-    printf "\r${CYAN}${msg} ${frame} ${RESET}"
-    sleep 0.08
-    ((i++))
+# ================= MATRIX BACKGROUND =================
+matrix_bg() {
+  for i in {1..20}; do
+    line=""
+    for j in {1..120}; do
+      rand=$((RANDOM % 2))
+      line+="$rand"
+    done
+    echo -e "${GREEN}${line}${RESET}"
   done
-
-  printf "\r${GREEN}${msg} ✔${RESET}\n"
 }
 
-# ================= UI =================
-clear
+# ================= HEADER =================
+header() {
+  clear
+  echo -e "${CYAN}"
+  echo "╔════════════════════════════════════════════════════════════════════╗"
+  echo "║                         UPLOAD FILE                                ║"
+  echo "║                    SYSTEM STATUS: ONLIN E                          ║"
+  echo "║                    MODE: FULL CONTROL PA NEL                       ║"
+  echo "╚════════════════════════════════════════════════════════════════════╝"
+  echo -e "${RESET}"
+}
 
-echo -e "${BLUE}"
-echo "=========================================="
-echo "   🚀 GIT ULTRA PRO MAX DEPLOY TOOL"
-echo "=========================================="
-echo -e "${RESET}"
+# ================= STATUS PANEL =================
+status_panel() {
+  branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
 
-# ================= CLEAN JUNK FILES =================
-echo -e "${YELLOW}🧹 Cleaning junk files...${RESET}"
-find . -name "*Zone.Identifier" -type f -delete 2>/dev/null
+  echo -e "${YELLOW}┌── SYSTEM DASHBOARD ───────────────────────────────┐${RESET}"
+  echo -e "  🌿 Branch      : ${GREEN}$branch${RESET}"
+  echo -e "  📁 Repo        : $(basename "$PWD")"
+  echo -e "  ⚡ Mode        : DEPLOY ACTIVE"
+  echo -e "  🧠 AI Status   : READY"
+  echo -e "${YELLOW}└───────────────────────────────────────────────────┘${RESET}"
+}
 
-# ================= ADD =================
-(git add .) &
-spinner $! "📦 Adding files"
+# ================= DEPLOY SEQUENCE =================
+deploy() {
+  echo ""
+  echo -e "${CYAN}[1] Injecting files...${RESET}"
+  git add . >/dev/null 2>&1
+  sleep 1
 
-# ================= COMMIT =================
-git commit -m "update" >/dev/null 2>&1
-if [ $? -ne 0 ]; then
-  echo -e "${YELLOW}⚠ No changes to commit${RESET}"
-  exit 0
-fi
+  echo -e "${CYAN}[2] Committing system...${RESET}"
+  git commit -m "update" >/dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo -e "${RED}[ERROR] No changes detected${RESET}"
+    return
+  fi
+  sleep 1
 
-echo -e "${GREEN}💬 Commit done${RESET}"
+  branch=$(git rev-parse --abbrev-ref HEAD)
 
-# ================= BRANCH =================
-branch=$(git rev-parse --abbrev-ref HEAD)
-echo -e "${CYAN}🌿 Branch: $branch${RESET}"
+  echo -e "${CYAN}[3] Pushing to origin/$branch...${RESET}"
+  git push origin --force "$branch" >/dev/null 2>&1
+  sleep 1
 
-# ================= PUSH =================
-(git push origin --force "$branch") &
-spinner $! "🚀 Pushing to origin"
+  echo ""
+  echo -e "${GREEN}======================================"
+  echo "       DEPLOY SUCCESSFUL"
+  echo -e "======================================${RESET}"
+}
 
-if [ $? -ne 0 ]; then
-  echo -e "${RED}❌ Push failed${RESET}"
-  exit 1
-fi
+# ================= MAIN LOOP =================
+while true; do
+  header
+  matrix_bg
+  status_panel
 
-# ================= SUCCESS ANIMATION =================
-echo ""
-echo -e "${GREEN}"
-echo "🎉 DEPLOY SUCCESSFUL"
-echo -e "${RESET}"
+  echo ""
+  echo -e "${CYAN}COMMANDS:${RESET}"
+  echo "  [1] Deploy project"
+  echo "  [2] Refresh system"
+  echo "  [3] Exit OS"
+  echo ""
 
-# fake mini animation
-for i in {1..3}; do
-  echo -e "${CYAN}✨ Deploying${RESET}"
-  sleep 0.2
-  echo -e "${CYAN}🚀 Deploying.${RESET}"
-  sleep 0.2
-  echo -e "${CYAN}🚀 Deploying..${RESET}"
-  sleep 0.2
-  echo -e "${CYAN}🚀 Deploying...${RESET}"
+  read -p ">> " cmd
+
+  case $cmd in
+    1)
+      deploy
+      read -p "Press Enter..."
+      ;;
+    2)
+      continue
+      ;;
+    3)
+      echo "Shutting down..."
+      break
+      ;;
+    *)
+      echo "Unknown command..."
+      sleep 1
+      ;;
+  esac
 done
-
-# ================= FINAL =================
-echo ""
-echo -e "${BLUE}=========================================="
-echo -e "🌍 WEBSITE UPDATE IN 1–3 MINUTES"
-echo -e "🔥 ULTRA PRO MAX FINISHED"
-echo -e "=========================================="
-echo -e "${RESET}"
