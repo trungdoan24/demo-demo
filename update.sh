@@ -8,18 +8,21 @@ BLUE="\e[34m"
 CYAN="\e[36m"
 RESET="\e[0m"
 
-# ================= SPINNER =================
+# ================= SPINNER ANIMATION =================
 spinner() {
   pid=$1
   msg=$2
-  spin='⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏'
+
+  frames=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
 
   i=0
   while kill -0 $pid 2>/dev/null; do
-    i=$(( (i+1) %10 ))
-    printf "\r${CYAN}${msg} ${spin:$i:1}${RESET}"
-    sleep 0.1
+    frame=${frames[$((i % 10))]}
+    printf "\r${CYAN}${msg} ${frame} ${RESET}"
+    sleep 0.08
+    ((i++))
   done
+
   printf "\r${GREEN}${msg} ✔${RESET}\n"
 }
 
@@ -28,26 +31,30 @@ clear
 
 echo -e "${BLUE}"
 echo "=========================================="
-echo "     🚀 GIT DEPLOY WEB PRO - ULTRA"
+echo "   🚀 GIT ULTRA PRO MAX DEPLOY TOOL"
 echo "=========================================="
 echo -e "${RESET}"
+
+# ================= CLEAN JUNK FILES =================
+echo -e "${YELLOW}🧹 Cleaning junk files...${RESET}"
+find . -name "*Zone.Identifier" -type f -delete 2>/dev/null
 
 # ================= ADD =================
 (git add .) &
 spinner $! "📦 Adding files"
 
 # ================= COMMIT =================
-git commit -m "update"
+git commit -m "update" >/dev/null 2>&1
 if [ $? -ne 0 ]; then
-  echo -e "${YELLOW}⚠ Không có thay đổi để commit${RESET}"
+  echo -e "${YELLOW}⚠ No changes to commit${RESET}"
   exit 0
 fi
 
 echo -e "${GREEN}💬 Commit done${RESET}"
 
-# ================= BRANCH AUTO =================
+# ================= BRANCH =================
 branch=$(git rev-parse --abbrev-ref HEAD)
-echo -e "${CYAN}🌿 Current branch: $branch${RESET}"
+echo -e "${CYAN}🌿 Branch: $branch${RESET}"
 
 # ================= PUSH =================
 (git push origin --force "$branch") &
@@ -58,22 +65,27 @@ if [ $? -ne 0 ]; then
   exit 1
 fi
 
-echo -e "${GREEN}✔ Push success${RESET}"
-
-# ================= GUESS GITHUB PAGES =================
+# ================= SUCCESS ANIMATION =================
 echo ""
-echo -e "${YELLOW}🌐 Checking deploy target...${RESET}"
+echo -e "${GREEN}"
+echo "🎉 DEPLOY SUCCESSFUL"
+echo -e "${RESET}"
 
-if [ -d "docs" ]; then
-  echo -e "${GREEN}📁 Detected /docs deploy folder${RESET}"
-else
-  echo -e "${GREEN}📁 Using root deploy${RESET}"
-fi
+# fake mini animation
+for i in {1..3}; do
+  echo -e "${CYAN}✨ Deploying${RESET}"
+  sleep 0.2
+  echo -e "${CYAN}🚀 Deploying.${RESET}"
+  sleep 0.2
+  echo -e "${CYAN}🚀 Deploying..${RESET}"
+  sleep 0.2
+  echo -e "${CYAN}🚀 Deploying...${RESET}"
+done
 
-# ================= DONE =================
+# ================= FINAL =================
 echo ""
 echo -e "${BLUE}=========================================="
-echo -e "🎉 DEPLOY SUCCESSFUL"
-echo -e "🌍 Website will update in 1-3 minutes"
+echo -e "🌍 WEBSITE UPDATE IN 1–3 MINUTES"
+echo -e "🔥 ULTRA PRO MAX FINISHED"
 echo -e "=========================================="
 echo -e "${RESET}"
