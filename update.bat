@@ -1,8 +1,8 @@
 @echo off
 setlocal enabledelayedexpansion
-title CYBER DEPLOY SYSTEM v2
+title CYBER CONTROL SYSTEM
 
-:: ================= COLORS =================
+:: ===== COLORS =====
 for /f %%a in ('echo prompt $E^| cmd') do set "ESC=%%a"
 
 set GREEN=%ESC%[32m
@@ -14,14 +14,12 @@ set RESET=%ESC%[0m
 :: ================= MAIN LOOP =================
 :main
 cls
-call :header
-call :status
+call :ui
 
 echo.
-echo %CYAN%COMMAND CENTER%RESET%
-echo   [1] Deploy (FORCE + BACKUP)
-echo   [2] Rollback last backup
-echo   [3] Exit
+echo %CYAN%[1] Deploy System
+echo [2] Rollback System
+echo [3] Exit%RESET%
 echo.
 
 set /p cmd=">> "
@@ -30,85 +28,75 @@ if "%cmd%"=="1" goto deploy
 if "%cmd%"=="2" goto rollback
 if "%cmd%"=="3" exit
 
-echo %RED%Invalid command%RESET%
-timeout /t 1 >nul
 goto main
 
 
-:: ================= HEADER =================
-:header
+:: ================= UI =================
+:ui
 echo %CYAN%====================================================
-echo           🚀 CYBER DEPLOY SYSTEM v2
-echo        FORCE + BACKUP + ROLLBACK READY
+echo           🚀 CYBER DEPLOY CONTROL PANEL
 echo ====================================================%RESET%
-goto :eof
 
-
-:: ================= STATUS =================
-:status
 for /f "delims=" %%b in ('git rev-parse --abbrev-ref HEAD 2^>nul') do set branch=%%b
-if "%branch%"=="" set branch=no-git
+if "%branch%"=="" set branch=NO-GIT
 
 for %%r in ("%cd%") do set repo=%%~nxr
 
 echo.
-echo %YELLOW%---------------- SYSTEM STATUS ----------------%RESET%
+echo %YELLOW% STATUS SYSTEM%RESET%
 echo   🌿 Branch : %GREEN%%branch%%RESET%
 echo   📁 Repo   : %repo%
 echo   ⚡ Mode   : FORCE DEPLOY
 echo   💾 Backup : ENABLED
-echo %YELLOW%----------------------------------------------%RESET%
+echo %YELLOW%----------------------------------------------------%RESET%
 goto :eof
 
 
-:: ================= DEPLOY =================
+:: ================= DEPLOY (HIDDEN COMMANDS) =================
 :deploy
-echo.
-echo %CYAN%[1] Staging files...%RESET%
-git add . >nul
+cls
+echo %CYAN%Deploying system...%RESET%
+timeout /t 1 >nul
 
-:: ===== backup commit hash =====
-for /f "delims=" %%h in ('git rev-parse HEAD') do set lastcommit=%%h
+:: backup commit
+for /f "delims=" %%h in ('git rev-parse HEAD 2^>nul') do set lastcommit=%%h
 echo %lastcommit% > .last_backup
 
-echo %CYAN%[2] Committing...%RESET%
-git commit -m "auto backup + update" >nul
+echo %CYAN%Processing files...%RESET%
+git add . >nul 2>&1
 
-echo %CYAN%[3] FORCE PUSH...%RESET%
+echo %CYAN%Saving commit...%RESET%
+git commit -m "auto deploy" >nul 2>&1
+
+echo %CYAN%Syncing server...%RESET%
 for /f "delims=" %%b in ('git rev-parse --abbrev-ref HEAD') do set branch=%%b
-
-git push --force origin %branch% >nul
+git push --force origin %branch% >nul 2>&1
 
 echo.
-echo %GREEN%======================================
-echo        DEPLOY SUCCESS (FORCE)
-echo   Backup commit: %lastcommit%
-echo ======================================%RESET%
-
-pause
+echo %GREEN%✔ DEPLOY COMPLETE%RESET%
+timeout /t 2 >nul
 goto main
 
 
 :: ================= ROLLBACK =================
 :rollback
-echo.
+cls
+echo %YELLOW%Rolling back system...%RESET%
+
 if not exist .last_backup (
     echo %RED%No backup found%RESET%
-    pause
+    timeout /t 2 >nul
     goto main
 )
 
-set /p confirm=Rollback to last backup? (y/n): 
+set /p confirm=Confirm rollback (y/n): 
 if /i not "%confirm%"=="y" goto main
 
 set /p hash=<.last_backup
 
-echo %CYAN%Reverting to %hash%...%RESET%
+git reset --hard %hash% >nul 2>&1
+git push --force origin HEAD >nul 2>&1
 
-git reset --hard %hash%
-git push --force origin HEAD >nul
-
-echo.
-echo %GREEN%ROLLBACK COMPLETE%RESET%
-pause
+echo %GREEN%✔ ROLLBACK COMPLETE%RESET%
+timeout /t 2 >nul
 goto main
