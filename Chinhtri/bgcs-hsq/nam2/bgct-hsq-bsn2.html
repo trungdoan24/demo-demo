@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài giảng Chính trị HSQ, BS năm 2</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef3f8, #dfeee5);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1f3b2d, #2e5c45);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+        }
+
+        .header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: .9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: white;
+            background: #1f3b2d;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: .3s;
+        }
+
+        .back:hover {
+            background: #0066ff;
+        }
+
+        .stats {
+            background: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1f3b2d;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .document-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 15px;
+        }
+
+        .document-list li {
+            margin: 0;
+        }
+
+        .document-list a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #333;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            transition: .3s;
+            border-left: 5px solid transparent;
+        }
+
+        .document-list a:hover {
+            background: #0066ff;
+            color: white;
+            transform: translateY(-3px);
+            border-left: 5px solid #ffd700;
+            box-shadow: 0 8px 20px rgba(0, 102, 255, .25);
+        }
+
+        .pdf-icon {
+            font-size: 22px;
+        }
+
+        @media(max-width:768px) {
+            .document-list {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>
+            📚 BÀI GIẢNG CHÍNH TRỊ HSQ, BS NĂM 1
+        </h1>
+        <p>
+            Thư viện số Trung Đoàn 24
+        </p>
+    </div>
+    <div class="container">
+        <div class="toolbar">
+            <a class="back" href="vanban.html">
+                ← Quay lại
+            </a>
+            <div class="stats">
+                📄 6 Bài giảng
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2 class="section-title">
+            📖 Danh mục bài giảng
+        </h2>
+
+        <ul class="document-list">
+
+            <li>
+                <a href="../../../sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 6 Xây dựng Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam hiện nay.pdf"
+                    target="_blank">
+                    📄 Bài 6: Xây dựng Nhà nước pháp quyền xã hội chủ nghĩa Việt Nam hiện nay
+                </a>
+            </li>
+
+            <li>
+                <a href="../../../sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 7  Quan điểm, chính sách dân tộc, tôn giáo của Đảng và Nhà nước ta hiện nay..pdf"
+                    target="_blank">
+                    📄 Bài 7: Quan điểm, chính sách dân tộc, tôn giáo của Đảng và Nhà nước ta hiện nay
+                </a>
+            </li>
+
+            <li>
+                <a href="../../../sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 8 Đường lối, chính sách đối ngoại của Đảng và Nhà nước ta hiện nay.pdf"
+                    target="_blank">
+                    📄 Bài 8: Đường lối, chính sách đối ngoại của Đảng và Nhà nước ta hiện nay
+                </a>
+            </li>
+
+            <li>
+                <a href="../../../sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 9 “Quan điểm của Đảng về đối tác, đối tượng của cách mạng Việt Nam trong tình hình mới”..pdf"
+                    target="_blank">
+                    📄 Bài 9: Quan điểm của Đảng về đối tác, đối tượng của cách mạng Việt Nam trong tình hình mới
+                </a>
+            </li>
+
+            <li>
+                <a href="../../../sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 10 “Đấu tranh làm thất bại âm mưu, thủ đoạn ‘diễn biến hòa bình’, bạo loạn lật đổ của các thế lực thù địch chống phá cách mạng Việt Nam hiện nay”.pdf"
+                    target="_blank">
+                    📄 Bài 10: Đấu tranh làm thất bại âm mưu, thủ đoạn ‘diễn biến hòa bình’, bạo loạn lật đổ của các thế
+                    lực thù địch chống phá cách mạng Việt Nam hiện nay
+                </a>
+            </li>
+
+            <li>
+                <a href="../../../sohoa/THƯ VIỆN SỐ 3-6/BÀI GIẢNG CHÍNH TRỊ HSQ,BS/GIÁO ÁN HSQ - BS NĂM 2/Bài 11 Công tác vận động quần chúng, tham gia xây dựng cơ sở vững mạnh của cán bộ, chiến sĩ trong Quân đội hiện nay.pdf"
+                    target="_blank">
+                    📄 Bài 11: Công tác vận động quần chúng, tham gia xây dựng cơ sở vững mạnh của cán bộ, chiến sĩ
+                    trong Quân đội hiện nay
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+</body>
+
+</html>

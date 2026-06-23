@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AN TOÀN LAO ĐỘNG</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef3f8, #dfeee5);
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1f3b2d, #2e5c45);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+        }
+
+        .header h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: .9;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .back {
+            text-decoration: none;
+            color: white;
+            background: #1f3b2d;
+            padding: 10px 18px;
+            border-radius: 8px;
+            transition: .3s;
+        }
+
+        .back:hover {
+            background: #0066ff;
+        }
+
+        .stats {
+            background: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1f3b2d;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .document-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 15px;
+        }
+
+        .document-list li {
+            margin: 0;
+        }
+
+        .document-list a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #333;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 12px;
+            transition: .3s;
+            border-left: 5px solid transparent;
+        }
+
+        .document-list a:hover {
+            background: #0066ff;
+            color: white;
+            transform: translateY(-3px);
+            border-left: 5px solid #ffd700;
+            box-shadow: 0 8px 20px rgba(0, 102, 255, .25);
+        }
+
+        .pdf-icon {
+            font-size: 22px;
+        }
+
+        @media(max-width:768px) {
+            .document-list {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>
+            📚 An toàn lao động & Hậu cần & Kỹ thuật
+        </h1>
+        <p>
+            Thư viện số Trung Đoàn 24
+        </p>
+    </div>
+    <div class="container">
+        <div class="toolbar">
+            <a class="back" href="vanban.html">
+                ← Quay lại
+            </a>
+            <div class="stats">
+                📄 6 bài giảng
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <h2 class="section-title">
+            📖 Danh mục an toàn lao động
+        </h2>
+
+        <ul class="document-list">
+            <li class="document-item">
+                <a href="../../sohoa/hckt/ATLĐ/Chương trình khung HL nhóm 1.pdf">
+                    <span class="document-icon">📄</span>
+                    <span>Chương trình khung HL nhóm 1</span>
+                </a>
+            </li>
+            <li class="document-item">
+                <a
+                    href="../../sohoa/hckt/ATLĐ/CÁC NGHỊ ĐỊNH CỦA CHÍNH PHỦ QUY ĐỊNH, HƯỚNG DẪN THI HÀNH LUẬT AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
+                    <span class="document-icon">📄</span>
+                    <span>Các nghị định của Chính phủ quy định, hướng dẫn thi hành Luật An toàn, vệ sinh lao
+                        động</span>
+                </a>
+            </li>
+            <li class="document-item">
+                <a href="../../sohoa/hckt/ATLĐ/CÁCH NHẬN BIẾT CÁC YẾU TỐ NGUY HIỂM, YẾU TỐ CÓ HẠI TẠI NƠI LÀM VIỆC.pdf">
+                    <span class="document-icon">📄</span>
+                    <span>Cách nhận biết các yếu tố nguy hiểm, yếu tố có hại tại nơi làm việc</span>
+                </a>
+            </li>
+            <li class="document-item">
+                <a href="../../sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT LUẬT, NGHỊ ĐỊNH.pdf">
+                    <span class="document-icon">📄</span>
+                    <span>Giới thiệu tóm tắt Luật, Nghị định</span>
+                </a>
+            </li>
+            <li class="document-item">
+                <a
+                    href="../../sohoa/hckt/ATLĐ/GIỚI THIỆU TÓM TẮT THÔNG TƯ, VĂN BẢN HƯỚNG DẪN CỦA BỘ QUỐC PHÒNG VỀ AN TOÀN, VỆ SINH LAO ĐỘNG.pdf">
+                    <span class="document-icon">📄</span>
+                    <span>Thông tư, văn bản hướng dẫn của Bộ Quốc phòng về An toàn, vệ sinh lao động</span>
+                </a>
+            </li>
+            <li class="document-item">
+                <a href="../../sohoa/hckt/ATLĐ/MỘT SỐ GIẢI PHÁP CẢI THIỆN ĐIỀU KIỆN LAO ĐỘNG.pdf">
+                    <span class="document-icon">📄</span>
+                    <span>Một số giải pháp cải thiện điều kiện lao động</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</body>
+
+</html>
